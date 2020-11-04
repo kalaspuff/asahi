@@ -68,10 +68,9 @@ release:
 	make build
 
 	poetry run twine upload dist/asahi-extras-`python asahi/__version__.py`*
-
-	poetry lock
 	poetry run twine upload dist/asahi-`python asahi/__version__.py`*
 
+	poetry lock
 	git add pyproject.toml poetry.lock asahi-extras.toml asahi/__version__.py asahi/extras/__version__.py
 
 	git commit -m "Bumped version to `python asahi/__version__.py`" --allow-empty
