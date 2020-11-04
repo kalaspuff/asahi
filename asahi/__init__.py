@@ -21,7 +21,7 @@ __available_defs: Dict[str, Union[Tuple[str], Tuple[str, str]]] = {
 __imported_modules: Dict[str, Any] = {"asahi": __asahi_module}
 __cached_defs: Dict[str, Any] = {}
 
-print(sys.modules["asahi"])
+
 def __getattr__(name: str) -> Any:
     if name in __cached_defs:
         return __cached_defs[name]
