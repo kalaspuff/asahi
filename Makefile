@@ -67,7 +67,7 @@ release:
 	make version
 	make build
 
-	poetry run twine upload dist/asahi-extras-`python asahi/__version__.py`*
+	poetry run twine upload dist/asahi-extras-`python asahi/__version__.py`* dist/asahi_extras-`python asahi/__version__.py`*
 	poetry run twine upload dist/asahi-`python asahi/__version__.py`*
 
 	poetry lock
