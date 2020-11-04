@@ -2,8 +2,7 @@ from __future__ import annotations
 
 import importlib
 import sys
-from pkgutil import extend_path
-from typing import Any, Dict, Iterable, Optional, Tuple, Union, cast
+from typing import Any, Dict, Optional, Tuple, Union, cast
 
 try:
     from .__version__ import __version__, __version_info__  # noqa
@@ -27,6 +26,8 @@ def __getattr__(name: str) -> Any:
         return __cached_defs[name]
 
     if name in __available_defs:
+        real_name: Optional[str] = name
+
         adfs = __available_defs[name]
         if len(adfs) == 2:
             module_name, real_name = cast(Tuple[str, Optional[str]], adfs)
@@ -53,13 +54,10 @@ def __getattr__(name: str) -> Any:
     raise AttributeError("module 'asahi' has no attribute '{}'".format(name))
 
 
-__path__: Iterable[str] = extend_path(__path__, __name__)
-
 __all__ = [
     "__version__",
     "__version_info__",
     "__author__",
     "__email__",
     "extras",
-    "asahi",
 ]
