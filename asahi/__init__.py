@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import importlib
-from typing import Any, Dict, Tuple, Union
-from pkgutil import extend_path
 import sys
+from pkgutil import extend_path
+from typing import Any, Dict, Tuple, Union
 
 try:
     from .__version__ import __version__, __version_info__  # noqa
