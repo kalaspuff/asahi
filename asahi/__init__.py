@@ -37,7 +37,10 @@ def __getattr__(name: str) -> Any:
         if not __imported_modules.get(module_name):
             try:
                 __imported_modules[module_name] = importlib.import_module(module_name)
-            except ModuleNotFoundError:  # pragma: no cover
+            except ModuleNotFoundError as e:
+                missing_module_name = str(getattr(e, "name", None) or "")
+                if missing_module_name and missing_module_name == "asahi.extras":
+                    raise ModuleNotFoundError("module 'asahi.extras' not found - install package 'asahi-extras' first")
                 raise
             except Exception:  # pragma: no cover
                 raise

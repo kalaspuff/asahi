@@ -24,7 +24,7 @@ classifiers = [
 ]
 
 packages = [
-    { include = "asahi" },
+    { include = "asahi/extras" },
 ]
 
 include = [

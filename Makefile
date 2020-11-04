@@ -42,11 +42,23 @@ isort:
 
 build:
 	rm -rf dist/
-	poetry build
+
+	cp asahi/__version__.py asahi/extras/__version__.py
+	if cp pyproject.toml asahi-backup.toml && \
+			poetry build && \
+			cp pyproject.toml asahi.toml && \
+			cp asahi-extras.toml pyproject.toml && \
+			poetry build; then \
+		cp pyproject.toml asahi-extras.toml ; \
+		mv asahi.toml pyproject.toml ; \
+		rm asahi-backup.toml ; \
+	else \
+		mv asahi-backup.toml pyproject.toml ; \
+		rm asahi.toml ; \
+	fi
 
 .PHONY: _pypi_release
 _pypi_release:
-
 
 release:
 	make pytest
