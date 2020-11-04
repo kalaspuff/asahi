@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "asahi"
+name = "asahi-extras"
 version = "0.1.0"
 description = "A small package to provide utility functions to libraries that has optional installs / extras"
 authors = ["Carl Oscar Aaro <hello@carloscar.com>"]
@@ -25,15 +25,12 @@ classifiers = [
 
 packages = [
     { include = "asahi" },
-    { include = "asahi/extras/**/*", from = "asahi-extras" },
 ]
 
 include = [
     "asahi/py.typed",
     "asahi/**/*.py",
     "asahi/**/*.pyi",
-    "asahi-extras/**/*.py",
-    "asahi-extras/**/*.pyi",
 ]
 
 exclude = [
@@ -41,30 +38,11 @@ exclude = [
     "**/.gitignore",
     "**/poetry.lock",
     "**/*.pyc",
-    "**/__pycache__",
-    "asahi-extras/pyproject.toml",
-    "asahi-extras/poetry.lock",
-    "asahi-extras/README.md",
-    "asahi-extras/LICENSE",
-    "asahi-extras/dist/**/*",
-    "asahi-extras/asahi/py.typed",
-    "asahi-extras/asahi/shared.py",
-    "asahi-extras/asahi/__init__.py",
 ]
 
 [tool.poetry.dependencies]
 python = "^3.6"
-
-[tool.poetry.dev-dependencies]
-flake8 = "^3.8.4"
-flake8-black = "^0.2.0"
-flake8-isort = "^4.0.0"
-isort = "^5.6.4"
-pytest = "^6.1.1"
-pytest-cov = "^2.10.0"
-black = { version = "*", allow-prereleases = true }
-mypy = "^0.790"
-codecov = "^2.1.10"
+asahi = ">=0.1.0, <1.0.0"
 
 [build-system]
 requires = ["poetry_core>=1.0.0"]
@@ -79,5 +57,5 @@ exclude = '\.eggs/|asahi\.egg-info/|asahi_extras\.egg-info/|asahi-extras\.egg-in
 [tool.isort]
 profile = "black"
 line_length = 120
-known_first_party = "asahi,asahi_extras"
+known_first_party = "asahi,asahi_extras,asahi.extras"
 skip = ".mypy_cache,__pycache__,asahi.egg-info,asahi_extras.egg-info,asahi-extras.egg-info,asahiextras.egg-info,.eggs,.vscode,dist"

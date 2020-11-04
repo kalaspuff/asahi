@@ -9,18 +9,6 @@
 
 *A small package to provide utility functions to libraries that has optional installs (so called "extras").*
 
+## `asahi-extras`
 
-## Installation with `pip`
-Like you would install any other Python package, use `pip`, `poetry`, `pipenv` or your weapon of choice.
-```
-$ pip install asahi
-```
-
-
-## Usage and examples
-
-#### Use-case
-```
-import asahi
-
-```
+This is a subpackage of `asahi` which can be found at https://github.com/kalaspuff/asahi.

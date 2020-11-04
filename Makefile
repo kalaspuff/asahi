@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 .PHONY: test version tests build dist release
 ifndef VERBOSE
 .SILENT:
@@ -19,7 +20,9 @@ mypy:
 	poetry run mypy asahi/
 
 version:
+	cp asahi/__version__.py extras/asahi/extras/__version__.py
 	poetry version `python asahi/__version__.py`
+	cd extras && poetry version `python asahi/extras/__version__.py` && cd ${PWD}
 
 black:
 	poetry run black asahi/ tests/
@@ -38,7 +41,8 @@ release:
 	make version
 	make build
 	poetry publish
-	git add pyproject.toml asahi/__version__.py
+	cd extras && poetry publish && cd ${PWD}
+	git add pyproject.toml asahi/__version__.py asahi-extras/asahi/extras/pyproject.toml asahi-extras/asahi/extras/__version__.py
 	git commit -m "Bumped version" --allow-empty
 	git tag -a `python asahi/__version__.py` -m `python asahi/__version__.py`
 	git push
