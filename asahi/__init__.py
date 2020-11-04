@@ -3,7 +3,7 @@ from __future__ import annotations
 import importlib
 import sys
 from pkgutil import extend_path
-from typing import Any, Dict, Tuple, Union
+from typing import Any, Dict, Iterable, Optional, Tuple, Union, cast
 
 try:
     from .__version__ import __version__, __version_info__  # noqa
@@ -15,7 +15,7 @@ __author__ = "Carl Oscar Aaro"  # noqa
 __email__ = "hello@carloscar.com"  # noqa
 
 __asahi_module = sys.modules["asahi"]
-__available_defs: Dict[str, Union[Tuple[str], Tuple[str, str]]] = {
+__available_defs: Dict[str, Union[Tuple[str], Tuple[str, Optional[str]]]] = {
     "extras": ("asahi.extras", None),
 }
 __imported_modules: Dict[str, Any] = {"asahi": __asahi_module}
@@ -27,8 +27,11 @@ def __getattr__(name: str) -> Any:
         return __cached_defs[name]
 
     if name in __available_defs:
-        module_name = __available_defs[name][0]
-        real_name = name if len(__available_defs[name]) < 2 else __available_defs[name][1]
+        adfs = __available_defs[name]
+        if len(adfs) == 2:
+            module_name, real_name = cast(Tuple[str, Optional[str]], adfs)
+        else:
+            (module_name,) = cast(Tuple[str], adfs)
 
         if not __imported_modules.get(module_name):
             try:
@@ -50,7 +53,7 @@ def __getattr__(name: str) -> Any:
     raise AttributeError("module 'asahi' has no attribute '{}'".format(name))
 
 
-__path__ = extend_path(__path__, __name__)
+__path__: Iterable[str] = extend_path(__path__, __name__)
 
 __all__ = [
     "__version__",
