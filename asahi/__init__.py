@@ -3,8 +3,7 @@ from __future__ import annotations
 import importlib
 from typing import Any, Dict, Tuple, Union
 from pkgutil import extend_path
-
-from .shared import __author__, __email__  # noqa
+import sys
 
 try:
     from .__version__ import __version__, __version_info__  # noqa
@@ -12,13 +11,17 @@ except Exception:
     pass
 
 
+__author__ = "Carl Oscar Aaro"  # noqa
+__email__ = "hello@carloscar.com"  # noqa
+
+__asahi_module = sys.modules["asahi"]
 __available_defs: Dict[str, Union[Tuple[str], Tuple[str, str]]] = {
-    "extras": ("asahi.extras",),
+    "extras": ("asahi.extras", None),
 }
-__imported_modules: Dict[str, Any] = {}
+__imported_modules: Dict[str, Any] = {"asahi": __asahi_module}
 __cached_defs: Dict[str, Any] = {}
 
-
+print(sys.modules["asahi"])
 def __getattr__(name: str) -> Any:
     if name in __cached_defs:
         return __cached_defs[name]
@@ -37,7 +40,11 @@ def __getattr__(name: str) -> Any:
 
         module = __imported_modules.get(module_name)
 
-        __cached_defs[name] = getattr(module, real_name)
+        if real_name is not None:
+            __cached_defs[name] = getattr(module, real_name)
+        else:
+            __cached_defs[name] = module
+
         return __cached_defs[name]
 
     raise AttributeError("module 'asahi' has no attribute '{}'".format(name))

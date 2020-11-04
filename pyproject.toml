@@ -25,15 +25,12 @@ classifiers = [
 
 packages = [
     { include = "asahi" },
-    { include = "asahi/extras/**/*", from = "asahi-extras" },
 ]
 
 include = [
     "asahi/py.typed",
     "asahi/**/*.py",
     "asahi/**/*.pyi",
-    "asahi-extras/**/*.py",
-    "asahi-extras/**/*.pyi",
 ]
 
 exclude = [
@@ -42,18 +39,17 @@ exclude = [
     "**/poetry.lock",
     "**/*.pyc",
     "**/__pycache__",
-    "asahi-extras/pyproject.toml",
-    "asahi-extras/poetry.lock",
-    "asahi-extras/README.md",
-    "asahi-extras/LICENSE",
-    "asahi-extras/dist/**/*",
-    "asahi-extras/asahi/py.typed",
-    "asahi-extras/asahi/shared.py",
-    "asahi-extras/asahi/__init__.py",
+    "asahi/extras/**/*.pyi",
+    "asahi/extras/**/*.pyi",
 ]
 
 [tool.poetry.dependencies]
 python = "^3.6"
+asahi-extras = { version = "^0.1.0", optional = true }
+
+[tool.poetry.extras]
+extras = ["asahi-extras"]
+asahi-extras = ["asahi-extras"]
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.4"
@@ -79,5 +75,5 @@ exclude = '\.eggs/|asahi\.egg-info/|asahi_extras\.egg-info/|asahi-extras\.egg-in
 [tool.isort]
 profile = "black"
 line_length = 120
-known_first_party = "asahi,asahi_extras"
+known_first_party = "asahi,asahi_extras,asahi.extras"
 skip = ".mypy_cache,__pycache__,asahi.egg-info,asahi_extras.egg-info,asahi-extras.egg-info,asahiextras.egg-info,.eggs,.vscode,dist"

@@ -20,9 +20,19 @@ mypy:
 	poetry run mypy asahi/
 
 version:
-	cp asahi/__version__.py extras/asahi/extras/__version__.py
-	poetry version `python asahi/__version__.py`
-	cd extras && poetry version `python asahi/extras/__version__.py` && cd ${PWD}
+	cp asahi/__version__.py asahi/extras/__version__.py
+	if cp pyproject.toml asahi-backup.toml && \
+			poetry version `python asahi/__version__.py` && \
+			cp pyproject.toml asahi.toml && \
+			cp asahi-extras.toml pyproject.toml && \
+			poetry version `python asahi/__version__.py`; then \
+		cp pyproject.toml asahi-extras.toml ; \
+		mv asahi.toml pyproject.toml ; \
+		rm asahi-backup.toml ; \
+	else \
+		mv asahi-backup.toml pyproject.toml ; \
+		rm asahi.toml ; \
+	fi
 
 black:
 	poetry run black asahi/ tests/
@@ -34,16 +44,25 @@ build:
 	rm -rf dist/
 	poetry build
 
+.PHONY: _pypi_release
+_pypi_release:
+
+
 release:
 	make pytest
 	make flake8
 	make mypy
 	make version
 	make build
-	poetry publish
-	cd extras && poetry publish && cd ${PWD}
-	git add pyproject.toml asahi/__version__.py asahi-extras/asahi/extras/pyproject.toml asahi-extras/asahi/extras/__version__.py
-	git commit -m "Bumped version" --allow-empty
+
+	poetry run twine upload dist/asahi-extras-`python asahi/__version__.py`*
+
+	poetry lock
+	poetry run twine upload dist/asahi-`python asahi/__version__.py`*
+
+	git add pyproject.toml poetry.lock asahi-extras.toml asahi/__version__.py asahi/extras/__version__.py
+
+	git commit -m "Bumped version to `python asahi/__version__.py`" --allow-empty
 	git tag -a `python asahi/__version__.py` -m `python asahi/__version__.py`
 	git push
 	git push --tags

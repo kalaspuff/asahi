@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "asahi-extras"
 version = "0.1.0"
-description = "A small package to provide utility functions to libraries that has optional installs / extras"
+description = "Optional installer utility and companion package to 'asahi'"
 authors = ["Carl Oscar Aaro <hello@carloscar.com>"]
 homepage = "https://github.com/kalaspuff/asahi"
 repository = "https://github.com/kalaspuff/asahi"
@@ -28,9 +28,8 @@ packages = [
 ]
 
 include = [
-    "asahi/py.typed",
-    "asahi/**/*.py",
-    "asahi/**/*.pyi",
+    "asahi/extras/**/*.py",
+    "asahi/extras/**/*.pyi",
 ]
 
 exclude = [
@@ -38,24 +37,13 @@ exclude = [
     "**/.gitignore",
     "**/poetry.lock",
     "**/*.pyc",
+    "**/__pycache__",
 ]
 
 [tool.poetry.dependencies]
 python = "^3.6"
-asahi = ">=0.1.0, <1.0.0"
+asahi = "^0.1.0"
 
 [build-system]
 requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.black]
-line-length = 120
-target_version = ["py36", "py37", "py38"]
-include = '\.pyi?$'
-exclude = '\.eggs/|asahi\.egg-info/|asahi_extras\.egg-info/|asahi-extras\.egg-info/|asahiextras\.egg-info/|\.git/|\.mypy_cache/|\.venv/|\.pytest_cache/|\.vscode/|__pycache__/|build/|dist/|setup\.py'
-
-[tool.isort]
-profile = "black"
-line_length = 120
-known_first_party = "asahi,asahi_extras,asahi.extras"
-skip = ".mypy_cache,__pycache__,asahi.egg-info,asahi_extras.egg-info,asahi-extras.egg-info,asahiextras.egg-info,.eggs,.vscode,dist"
