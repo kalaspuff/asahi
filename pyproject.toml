@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asahi"
-version = "0.1.0"
+version = "0.1.1"
 description = "A small package to provide utility functions to libraries that has optional installs / extras"
 authors = ["Carl Oscar Aaro <hello@carloscar.com>"]
 homepage = "https://github.com/kalaspuff/asahi"
