@@ -61,14 +61,15 @@ build:
 _pypi_release:
 
 release:
+	poetry install
 	make pytest
 	make flake8
 	make mypy
 	make version
 	make build
-
-	poetry run twine upload dist/asahi-extras-`python asahi/__version__.py`* dist/asahi_extras-`python asahi/__version__.py`*
-	poetry run twine upload dist/asahi-`python asahi/__version__.py`*
+	python asahi/__version__.py
+	twine upload dist/asahi-extras-`python asahi/__version__.py`* dist/asahi_extras-`python asahi/__version__.py`*
+	twine upload dist/asahi-`python asahi/__version__.py`*
 
 	poetry lock
 	git add pyproject.toml poetry.lock asahi-extras.toml asahi/__version__.py asahi/extras/__version__.py
