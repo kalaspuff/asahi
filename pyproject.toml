@@ -56,7 +56,7 @@ flake8-black = "^0.2.0"
 flake8-isort = "^4.0.0"
 isort = "^5.7.0"
 pytest = "^6.2.2"
-pytest-cov = "^2.10.0"
+pytest-cov = "^2.11.1"
 black = { version = "*", allow-prereleases = true }
 mypy = "^0.790"
 codecov = "^2.1.11"
