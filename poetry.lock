@@ -1,13 +1,13 @@
 [[package]]
 name = "asahi-extras"
-version = "0.1.1"
+version = "0.2.0"
 description = "Optional installer utility and companion package to 'asahi'"
 category = "main"
 optional = true
-python-versions = ">=3.6,<4.0"
+python-versions = ">=3.7,<4.0"
 
 [package.dependencies]
-asahi = ">=0.1.0,<0.2.0"
+asahi = ">=0.1.0"
 
 [[package]]
 name = "attrs"
@@ -440,8 +440,8 @@ content-hash = "37cd205b97795059f57f5d327db1dab3e07d5c0e7871cc432de171b30c73c60f
 
 [metadata.files]
 asahi-extras = [
-    {file = "asahi-extras-0.1.1.tar.gz", hash = "sha256:83526d16c619318894a92e0a6f2c603b401eb29cdda059848a10635154737706"},
-    {file = "asahi_extras-0.1.1-py3-none-any.whl", hash = "sha256:750e9d3c302e0667712b0abaeaf76db4f4a74413b5f76ae1f0333d9219f74fea"},
+    {file = "asahi-extras-0.2.0.tar.gz", hash = "sha256:d65f3976498ce280ee2abc7aac2559b452b0ee0e2305cdda3b6ec7f2e2d8f1b7"},
+    {file = "asahi_extras-0.2.0-py3-none-any.whl", hash = "sha256:55d07be7ab842482b3f32ad723b20cdc651566b28d497a85e798b73ab67dc255"},
 ]
 attrs = [
     {file = "attrs-21.4.0-py2.py3-none-any.whl", hash = "sha256:2d27e3784d7a565d36ab851fe94887c5eccd6a463168875832a1be79c82828b4"},
