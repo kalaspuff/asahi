@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asahi"
-version = "0.1.1"
+version = "0.2.0"
 description = "A small package to provide utility functions to libraries that has optional installs / extras"
 authors = ["Carl Oscar Aaro <hello@carloscar.com>"]
 homepage = "https://github.com/kalaspuff/asahi"
@@ -14,10 +14,10 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Intended Audience :: Developers",
     "Typing :: Typed",
     "License :: OSI Approved :: MIT License",
@@ -44,8 +44,8 @@ exclude = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6"
-asahi-extras = { version = "^0.1.0", optional = true }
+python = "^3.7"
+asahi-extras = { version = ">=0.1.0", optional = true }
 
 [tool.poetry.extras]
 extras = ["asahi-extras"]
@@ -67,7 +67,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 120
-target_version = ["py36", "py37", "py38"]
+target_version = ["py37", "py38", "py39"]
 include = '\.pyi?$'
 exclude = '\.eggs/|asahi\.egg-info/|asahi_extras\.egg-info/|asahi-extras\.egg-info/|asahiextras\.egg-info/|\.git/|\.mypy_cache/|\.venv/|\.pytest_cache/|\.vscode/|__pycache__/|build/|dist/|setup\.py'
 
