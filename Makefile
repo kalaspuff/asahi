@@ -4,20 +4,31 @@ ifndef VERBOSE
 .SILENT:
 endif
 
+PACKAGENAME := $(shell poetry version | awk {'print $$1'})
+
 default:
 	@echo "Usage:"
 	@echo "- make test         | run tests"
 	@echo "- make black        | run black -l 120"
 	@echo "- make release      | upload dist and push tag"
 
+install:
+	poetry install
+
 pytest:
-	PYTHONPATH=. poetry run pytest --cov-report term-missing --cov=asahi tests/
+	PYTHONPATH=. poetry run pytest --cov-report term-missing --cov=${PACKAGENAME}/ tests -v
 
 flake8:
-	poetry run flake8 asahi/ tests/
+	poetry run flake8 ${PACKAGENAME}/ tests/
 
 mypy:
-	poetry run mypy asahi/
+	poetry run mypy ${PACKAGENAME}/ tests/
+
+black:
+	poetry run black ${PACKAGENAME}/ tests/
+
+isort:
+	poetry run isort ${PACKAGENAME}/ tests/
 
 version:
 	cp asahi/__version__.py asahi/extras/__version__.py
@@ -33,12 +44,6 @@ version:
 		mv asahi-backup.toml pyproject.toml ; \
 		rm asahi.toml ; \
 	fi
-
-black:
-	poetry run black asahi/ tests/
-
-isort:
-	poetry run isort asahi/ tests/
 
 build:
 	rm -rf dist/
