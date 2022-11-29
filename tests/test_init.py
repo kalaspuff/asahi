@@ -11,6 +11,8 @@ def test_init() -> None:
     assert isinstance(asahi.__version__, str)
     assert len(asahi.__version__)
 
+    assert asahi.extras
+
 
 def test_extras() -> None:
     import asahi.extras
